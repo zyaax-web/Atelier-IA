@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15111f"><meta name="description" content="Atelier IA — interface mobile pour créer des images et vidéos à partir d'un prompt.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="icon-512.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Atelier IA</title>
+<style>
+:root{--bg:#100d17;--panel:#1d1828;--panel2:#272033;--text:#f8f4ff;--muted:#b9aecb;--pink:#f18ab8;--purple:#a99aff;--line:#3a3048}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#29203a 0,var(--bg) 58%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:650px;margin:auto;padding:20px 16px 44px}.brand{display:flex;align-items:center;gap:12px;margin:8px 0 22px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;font-size:25px;color:#1a1121}.brand h1{font-size:23px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
+h2{font-size:20px;margin:0 0 8px}.intro{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:18px}.welcome-art{display:block;width:100%;height:auto;max-height:310px;object-fit:cover;object-position:top;border:1px solid #60405f;border-radius:20px;margin:0 0 18px;box-shadow:0 12px 35px #0006}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.tab{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 5px;color:var(--text);font-weight:650}.tab.active{border-color:var(--pink);background:#39243b;box-shadow:inset 0 0 0 1px #f18ab855}
+.panel{background:#1c1726dd;border:1px solid var(--line);border-radius:20px;padding:17px;margin:12px 0}.label{display:block;font-size:13px;font-weight:700;margin:14px 0 7px}textarea,select,input[type=text]{width:100%;border:1px solid #493d59;background:#110e18;color:var(--text);border-radius:12px;padding:12px;font:inherit;outline:none}textarea{min-height:120px;resize:vertical}select{min-height:46px}textarea:focus,select:focus,input:focus{border-color:var(--purple)}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:13px;padding:13px 15px;font:inherit;font-weight:750;cursor:pointer}.primary{width:100%;background:linear-gradient(100deg,var(--pink),var(--purple));color:#1b1023;margin-top:14px}.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}.small{font-size:12px;color:var(--muted);line-height:1.45}.preview{display:none;width:100%;max-height:330px;object-fit:contain;background:#0b0910;border-radius:12px;margin-top:12px}.notice{border:1px solid #66543b;background:#2c2419;border-radius:12px;padding:12px;color:#f6ddb0;font-size:13px;line-height:1.5}.result{white-space:pre-wrap;overflow-wrap:anywhere;background:#110e18;border:1px solid var(--line);padding:12px;border-radius:12px;color:#e9dfff;font-size:13px;display:none;margin-top:12px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}a{color:#e8b5ff}
+@media(min-width:520px){main{padding-top:30px}.panel{padding:22px}}
+</style>
+</head>
+<body><main>
+<header class="brand"><div class="logo">✦</div><div><h1>Atelier IA</h1><p>Ton studio créatif sur Android</p></div></header>
+<img class="welcome-art" src="accueil-atelier-ia.png" alt="Illustration d’accueil Atelier IA, photos et vidéos créatives"><h2>Imagine. Décris. Crée.</h2><p class="intro">Prépare tes idées de photos et vidéos IA depuis ton téléphone. Choisis un mode, décris la scène et prépare un prompt détaillé en quelques secondes.</p>
+<div class="tabs" role="tablist"><button class="tab active" data-mode="photo">📸 Photo IA</button><button class="tab" data-mode="video">🎬 Vidéo IA</button><button class="tab" data-mode="animate">✨ Animer photo</button></div>
+<section class="panel">
+<label class="label" for="prompt">Décris ce que tu veux créer</label>
+<textarea id="prompt" placeholder="Ex. : Un petit personnage chibi aux cheveux bruns, assis sous un ciel étoilé, lune lumineuse, ambiance douce et cinématographique…"></textarea>
+<div class="row"><div><label class="label" for="style">Style visuel</label><select id="style"><option>Réaliste cinématographique</option><option>Chibi kawaii 3D</option><option>Anime japonais</option><option>Fantasy magique</option><option>Portrait professionnel</option><option>Illustration douce</option><option>Horreur / Halloween</option></select></div><div><label class="label" for="format">Format</label><select id="format"><option value="9:16">Vertical 9:16 — TikTok</option><option value="1:1">Carré 1:1 — profil</option><option value="16:9">Paysage 16:9</option><option value="4:5">Portrait 4:5</option></select></div></div>
+<div id="videoOptions" style="display:none"><div class="row"><div><label class="label" for="duration">Durée souhaitée</label><select id="duration"><option>5 secondes</option><option>8 secondes</option><option>10 secondes</option><option>15 secondes</option></select></div><div><label class="label" for="motion">Mouvement</label><select id="motion"><option>Mouvement doux de caméra</option><option>Personnage en mouvement</option><option>Zoom cinématographique</option><option>Scène dynamique</option></select></div></div></div>
+<div id="uploadArea" style="display:none"><label class="label" for="imageInput">Choisir une photo à animer</label><input id="imageInput" type="file" accept="image/*" style="max-width:100%;color:var(--muted)"><img id="preview" class="preview" alt="Aperçu de la photo sélectionnée"></div>
+<label class="label" for="extras">Options supplémentaires (facultatif)</label><input id="extras" type="text" placeholder="Ex. : sans texte, lumière rose, musique douce…">
+<button class="btn primary" id="build">✨ Préparer mon prompt IA</button>
+<div id="result" class="result"></div><button id="copy" class="btn secondary" style="display:none;width:100%;margin-top:10px">Copier le prompt</button>
+</section>
+<section class="panel"><h2 style="font-size:17px">Passer à la génération</h2><p class="small">Cette version prépare tes prompts et fonctionne comme interface mobile. Pour créer réellement l'image ou la vidéo, il faut ouvrir un moteur IA externe ou connecter une API de génération. La génération vidéo, les voix parlantes, la musique et les sous-titres ne sont pas inclus dans cette version hors ligne.</p>
+<div class="notice">🔒 Ne colle pas de clé API secrète dans cette page : elle n'est pas protégée comme une application serveur.</div>
+<label class="label" for="engine">Choisir un service de création</label><select id="engine"><option value="https://www.bing.com/images/create">Images — Bing Image Creator</option><option value="https://leonardo.ai/">Images — Leonardo AI</option><option value="https://pika.art/">Vidéos — Pika</option><option value="https://pixverse.ai/">Vidéos — PixVerse</option><option value="https://klingai.com/">Vidéos — Kling AI</option></select>
+<button class="btn secondary" id="openEngine" style="width:100%;margin-top:10px">Ouvrir le service choisi ↗</button>
+<p class="small" style="margin-top:10px">Les services externes peuvent demander un compte, appliquer des limites gratuites ou modifier leurs conditions. Atelier IA ne garantit pas leur gratuité.</p>
+</section>
+<div class="footer">Atelier IA · Prototype mobile en français · Pas encore une application Android native</div>
+</main>
+<script>
+let mode='photo';
+const tabs=[...document.querySelectorAll('.tab')], videoOptions=document.getElementById('videoOptions'), uploadArea=document.getElementById('uploadArea');
+tabs.forEach(t=>t.addEventListener('click',()=>{mode=t.dataset.mode;tabs.forEach(x=>x.classList.toggle('active',x===t));videoOptions.style.display=mode==='video'?'block':'none';uploadArea.style.display=mode==='animate'?'block':'none';document.getElementById('build').textContent=mode==='photo'?'✨ Préparer mon prompt IA':mode==='video'?'🎬 Préparer mon prompt vidéo':'✨ Préparer l’animation';}));
+document.getElementById('imageInput').addEventListener('change',e=>{const f=e.target.files[0],img=document.getElementById('preview');if(f){img.src=URL.createObjectURL(f);img.style.display='block';}});
+function buildPrompt(){let p=document.getElementById('prompt').value.trim();if(!p){alert('Écris d’abord une description de ce que tu veux créer.');return;}let style=document.getElementById('style').value,format=document.getElementById('format').value,extras=document.getElementById('extras').value.trim();let out='';
+if(mode==='photo')out=`Créer une image ${style.toLowerCase()}. Sujet et scène : ${p}. Composition soignée, détails nets, éclairage harmonieux, qualité élevée. Format ${format}.${extras?' Options supplémentaires : '+extras+'.':''}`;
+else if(mode==='video')out=`Créer une vidéo IA de ${document.getElementById('duration').value}, style ${style.toLowerCase()}, format ${format}. Scène : ${p}. Mouvement : ${document.getElementById('motion').value}. Mouvement fluide, continuité visuelle, caméra stable, rendu détaillé.${extras?' Options supplémentaires : '+extras+'.':''}`;
+else out=`Animer la photo fournie en conservant l’identité, le visage, les vêtements et le style du sujet. Style ${style.toLowerCase()}, format ${format}. Animation souhaitée : ${p}. Mouvement naturel et fluide, arrière-plan cohérent, éviter les déformations du visage et des mains.${extras?' Options supplémentaires : '+extras+'.':''}`;
+document.getElementById('result').textContent=out;document.getElementById('result').style.display='block';document.getElementById('copy').style.display='block';}
+document.getElementById('build').addEventListener('click',buildPrompt);
+document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('result').textContent);document.getElementById('copy').textContent='✓ Prompt copié';}catch(e){alert('Sélectionne le texte affiché puis copie-le manuellement.');}});
+document.getElementById('openEngine').addEventListener('click',()=>window.open(document.getElementById('engine').value,'_blank','noopener'));
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
